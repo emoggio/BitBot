@@ -8,7 +8,7 @@ const conversation = {
             { text: "And somehow decided:\n\"I'll build a website\" was the solution.", delay: 1500 },
             { text: "Anyway. Here it is:\n\nHe'd really like to know if you'd be his Valentine and take you out. 💘", delay: 2000 },
             { text: "He also did not fully think through:\n\nTime zones 🌍\nDistances ✈️\nOr the fact that Valentine's Day is… today 💘", delay: 2200 },
-            { text: "In his defence, he is Italian. 🇮🇹\n\nWhich means:\nExcellent at romance\nQuestionable at planning", delay: 1800 },
+            { text: "In his defence, he is Italian. 🤌\n\nWhich means:\nExcellent at romance\nQuestionable at planning", delay: 1800 },
             { text: "But let's pretend this was all part of the plan.\n\nPlease don't tell him I said that. 🤫", delay: 1600 }
         ],
         answers: [
