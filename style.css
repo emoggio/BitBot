@@ -386,6 +386,90 @@ body {
     z-index: 0;
 }
 
+/* Easter egg - celebration hearts */
+.celebration-heart {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+    animation: popHeart 3s ease-out forwards;
+}
+
+.celebration-heart::before,
+.celebration-heart::after {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 24px;
+    background: linear-gradient(135deg, #ff6b9d 0%, #ff1493 100%);
+    border-radius: 15px 15px 0 0;
+}
+
+.celebration-heart::before {
+    left: 15px;
+    transform: rotate(-45deg);
+    transform-origin: 0 100%;
+}
+
+.celebration-heart::after {
+    left: 0;
+    transform: rotate(45deg);
+    transform-origin: 100% 100%;
+}
+
+@keyframes popHeart {
+    0% {
+        opacity: 0;
+        transform: translateY(0) scale(0.3) rotate(0deg);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(-20px) scale(1.2) rotate(15deg);
+    }
+    20% {
+        transform: translateY(-40px) scale(1) rotate(-10deg);
+    }
+    50% {
+        opacity: 1;
+        transform: translateY(-150px) scale(1.1) rotate(20deg);
+    }
+    80% {
+        opacity: 0.7;
+        transform: translateY(-250px) scale(0.8) rotate(-15deg);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(-350px) scale(0.5) rotate(30deg);
+    }
+}
+
+/* Screen flash effect for celebration */
+.celebration-flash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    background: radial-gradient(circle, rgba(255, 107, 157, 0.3) 0%, transparent 70%);
+    z-index: 9998;
+    animation: flash 0.6s ease-out;
+}
+
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    30% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .heart {
     position: absolute;
     width: 20px;

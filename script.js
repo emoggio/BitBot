@@ -319,6 +319,40 @@ function showAnswerOptions(answers) {
     });
 }
 
+// Create celebration hearts easter egg
+function createCelebrationHearts() {
+    // Add screen flash effect
+    const flash = document.createElement('div');
+    flash.className = 'celebration-flash';
+    document.body.appendChild(flash);
+    setTimeout(() => flash.remove(), 600);
+
+    // Create hearts
+    const heartCount = 20;
+
+    for (let i = 0; i < heartCount; i++) {
+        setTimeout(() => {
+            const heart = document.createElement('div');
+            heart.className = 'celebration-heart';
+
+            // Random position across the screen
+            const randomX = Math.random() * window.innerWidth;
+            heart.style.left = `${randomX}px`;
+            heart.style.bottom = '0px';
+
+            // Random delay for staggered effect
+            heart.style.animationDelay = `${Math.random() * 0.5}s`;
+
+            document.body.appendChild(heart);
+
+            // Remove after animation
+            setTimeout(() => {
+                heart.remove();
+            }, 3500);
+        }, i * 100);
+    }
+}
+
 // Handle user answer selection
 function handleAnswer(answer) {
     // Track the conversation path
@@ -326,6 +360,11 @@ function handleAnswer(answer) {
         choice: answer.text,
         destination: answer.next
     });
+
+    // Easter egg: If they say yes right away, celebrate!
+    if (answer.next === 'yes' && conversationPath.length === 1) {
+        createCelebrationHearts();
+    }
 
     // Add user's answer to chat
     addMessage(answer.text, 'user');
