@@ -9,10 +9,13 @@ A mobile-first Valentine's Day proposal chatbot with a WhatsApp/iMessage-style i
 - 🤖 Realistic typing indicators and natural delays
 - 💘 Charming Valentine's Day proposal conversation
 - ⚡ Smooth animations and transitions
-- 🎨 Dark theme with modern styling
+- 🎨 Pink/purple Valentine's Day theme with floating hearts
 - 👆 Tap-to-answer interaction
 - ✍️ Text input for custom responses
 - 😊 Witty personality and humor
+- 🔍 **Visitor tracking** - Detects returning visitors and prevents duplicate responses
+- 🌐 **IP tracking** - Records visitor IP addresses for identification
+- 🔄 **Smart handling** - Custom message for users who change their mind
 
 ## Files
 
@@ -79,6 +82,50 @@ Edit `style.css`:
 1. In `index.html`: Change `<h1>Bit</h1>` to your desired name
 2. In `index.html`: Change `<title>Chat with Bit</title>`
 3. Update the avatar letter in `<div class="avatar">B</div>`
+
+## Visitor Tracking System
+
+BitBot includes a smart visitor tracking system that:
+
+### How It Works
+
+1. **First Visit**: When someone visits for the first time:
+   - Generates a unique visitor ID stored in browser localStorage
+   - Records their IP address (via ipify API)
+   - Saves their response with all metadata
+
+2. **Return Visit**: If the same person visits again from the same device:
+   - Detects they've been here before
+   - Shows a custom "changing your mind?" message from Bit
+   - Deletes their previous response
+   - Saves only their newest response
+
+3. **Data Collected**:
+   - Visit ID (unique per device/browser)
+   - IP address
+   - Conversation path (choices made)
+   - Final response text
+   - Timestamp
+   - User agent
+   - Returning visitor flag
+
+### Admin Dashboard
+
+View all responses at `admin-secret-view.html` (keep this URL secret!):
+- Total response count
+- Returning visitor count
+- Latest response time
+- Full conversation paths
+- IP addresses
+- Visit IDs
+- Returning visitor badges
+
+### Privacy Notes
+
+- Data is stored in browser localStorage (client-side)
+- IP addresses are fetched from ipify.org
+- No server-side database by default
+- Set up webhook (see WEBHOOK_SETUP.md) to send data to Google Sheets
 
 ## Testing Locally
 

@@ -83,12 +83,95 @@ const messagesContainer = document.getElementById('messages');
 const answerOptionsContainer = document.getElementById('answerOptions');
 let userResponse = '';
 let conversationPath = [];
+let userIP = null;
+let isReturningVisitor = false;
 
 // Initialize the conversation
-function init() {
+async function init() {
+    // Get user's IP address
+    await getUserIP();
+
+    // Check if this is a returning visitor
+    const visitData = checkVisitStatus();
+
+    if (visitData.hasVisited) {
+        isReturningVisitor = true;
+        setTimeout(() => {
+            showReturningVisitorMessage(visitData);
+        }, 1000);
+    } else {
+        setTimeout(() => {
+            showStep('intro');
+        }, 1000);
+    }
+}
+
+// Get user's IP address
+async function getUserIP() {
+    try {
+        const response = await fetch('https://api.ipify.org?format=json');
+        const data = await response.json();
+        userIP = data.ip;
+    } catch (error) {
+        console.log('Could not fetch IP:', error);
+        userIP = 'unknown';
+    }
+}
+
+// Check if user has visited before
+function checkVisitStatus() {
+    const visitKey = 'bitbot_visit_id';
+    const existingVisitId = localStorage.getItem(visitKey);
+
+    if (existingVisitId) {
+        // Get their previous responses
+        const responses = JSON.parse(localStorage.getItem('bitbot_responses') || '[]');
+        const previousResponse = responses.find(r => r.visitId === existingVisitId);
+
+        return {
+            hasVisited: true,
+            visitId: existingVisitId,
+            previousResponse: previousResponse
+        };
+    }
+
+    // Generate a unique visit ID for this device
+    const newVisitId = 'visit_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    localStorage.setItem(visitKey, newVisitId);
+
+    return {
+        hasVisited: false,
+        visitId: newVisitId,
+        previousResponse: null
+    };
+}
+
+// Show message for returning visitors
+async function showReturningVisitorMessage(visitData) {
+    const messages = [
+        { text: "Oh.", delay: 800 },
+        { text: "It's you again.", delay: 1200 },
+        { text: "Having a change of heart? 🤔", delay: 1400 },
+        { text: "No worries.\n\nI'll make sure your last response gets deleted and updated so that my master doesn't get his wires crossed when planning stuff.", delay: 2200 },
+        { text: "He is Italian like I said and needs all the help he can get.", delay: 1800 },
+        { text: "Again… not my opinion.\n\nI am just a mere AI. 🤖", delay: 1600 },
+        { text: "So… let's try this again.", delay: 1200 }
+    ];
+
+    // Show the returning visitor messages
+    for (let i = 0; i < messages.length; i++) {
+        const message = messages[i];
+        await showMessageWithTyping(message.text, message.delay);
+        await delay(300 + Math.random() * 200);
+    }
+
+    // Clear the previous response
+    clearPreviousResponse(visitData.visitId);
+
+    // Continue with normal intro
     setTimeout(() => {
         showStep('intro');
-    }, 1000);
+    }, 800);
 }
 
 // Display a conversation step with multiple messages
@@ -314,17 +397,36 @@ function handleTextInput(text, nextStep) {
     }
 }
 
+// Clear previous response for returning visitor
+function clearPreviousResponse(visitId) {
+    let responses = JSON.parse(localStorage.getItem('bitbot_responses') || '[]');
+    // Remove any previous responses from this visitor
+    responses = responses.filter(r => r.visitId !== visitId);
+    localStorage.setItem('bitbot_responses', JSON.stringify(responses));
+}
+
 // Save response to localStorage and optionally send to webhook
 function saveResponse(text) {
+    const visitId = localStorage.getItem('bitbot_visit_id');
+
     const response = {
         answer: text,
         conversationPath: conversationPath,
+        visitId: visitId,
+        ipAddress: userIP,
+        isReturningVisitor: isReturningVisitor,
         timestamp: new Date().toISOString(),
-        date: new Date().toLocaleString()
+        date: new Date().toLocaleString(),
+        userAgent: navigator.userAgent
     };
 
     // Save to localStorage
     let responses = JSON.parse(localStorage.getItem('bitbot_responses') || '[]');
+
+    // Remove any existing response from this visitor (in case they somehow got through)
+    responses = responses.filter(r => r.visitId !== visitId);
+
+    // Add the new response
     responses.push(response);
     localStorage.setItem('bitbot_responses', JSON.stringify(responses));
 
