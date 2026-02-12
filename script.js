@@ -12,7 +12,7 @@ const conversation = {
             { text: "But let's pretend this was all part of the plan.\n\nPlease don't tell him I said that. 🤫", delay: 1600 }
         ],
         answers: [
-            { text: "👉 I'm not sure…", next: "uncertain" },
+            { text: "I'm not sure…", next: "uncertain" },
             { text: "👉 Yes, I'd love that", next: "yes" }
         ]
     },
@@ -37,7 +37,7 @@ const conversation = {
             { text: "Does that help? 😏", delay: 1000 }
         ],
         answers: [
-            { text: "👉 No, I'm sure", next: "no" },
+            { text: "No, I'm sure", next: "no" },
             { text: "👉 Okay… maybe", next: "maybe" }
         ]
     },
@@ -243,6 +243,26 @@ function delay(ms) {
 function addMessage(text, sender) {
     const messageDiv = document.createElement('div');
     messageDiv.className = `message ${sender}`;
+
+    // Check if previous message was from the same sender (for bubble grouping)
+    const previousMessage = messagesContainer.lastElementChild;
+    if (previousMessage && previousMessage.classList.contains('message')) {
+        const wasPreviousBot = previousMessage.classList.contains('bot');
+        const isCurrentBot = sender === 'bot';
+
+        // If previous was bot and current is bot, mark previous as having next bot
+        if (wasPreviousBot && isCurrentBot) {
+            previousMessage.classList.add('has-next-bot');
+        }
+
+        // If this is first bot message in a group
+        if (isCurrentBot && !wasPreviousBot) {
+            messageDiv.classList.add('first-in-group');
+        }
+    } else if (sender === 'bot') {
+        // First message overall and it's from bot
+        messageDiv.classList.add('first-in-group');
+    }
 
     const bubbleDiv = document.createElement('div');
     bubbleDiv.className = 'message-bubble';
