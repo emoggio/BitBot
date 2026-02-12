@@ -12,8 +12,8 @@ const conversation = {
             { text: "But let's pretend this was all part of the plan.\n\nPlease don't tell him I said that. 🤫", delay: 1600 }
         ],
         answers: [
-            { text: "👉 Yes, I'd love that", next: "yes" },
-            { text: "👉 I'm not sure…", next: "uncertain" }
+            { text: "👉 I'm not sure…", next: "uncertain" },
+            { text: "👉 Yes, I'd love that", next: "yes" }
         ]
     },
     yes: {
@@ -37,8 +37,8 @@ const conversation = {
             { text: "Does that help? 😏", delay: 1000 }
         ],
         answers: [
-            { text: "👉 Okay… maybe", next: "maybe" },
-            { text: "👉 No, I'm sure", next: "no" }
+            { text: "👉 No, I'm sure", next: "no" },
+            { text: "👉 Okay… maybe", next: "maybe" }
         ]
     },
     no: {
