@@ -2,100 +2,76 @@
 const conversation = {
     intro: {
         messages: [
-            "Hello! 👋",
-            "I am Bit the Bot, digital assistant and emotional support AI for my creator.",
-            "He has asked me (because he is brave on the internet but shy in real life) to deliver the following message:",
-            "Would you like to be his Valentine and let him take you out? 💘",
-            "He was smart enough to build me, but his Southern European sense of time and geography hasn't quite caught up…",
-            "You are thousands of miles away and Valentine's Day is today.",
-            "We will politely ignore this.",
-            "Please don't tell him I told you. 🤫"
+            { text: "Hi 👋\n\nI'm Bit.", delay: 1200 },
+            { text: "I was built very late at night for one very specific mission.", delay: 1800 },
+            { text: "My creator asked me to deliver a message because:\n\nHe thought about texting.\nThought about calling.\nThought about being \"normal\".", delay: 2200 },
+            { text: "And somehow decided:\n\"I'll build a website\" was the solution.", delay: 1500 },
+            { text: "Anyway. Here it is:\n\nHe'd really like to know if you'd be his Valentine and take you out. 💘", delay: 2000 },
+            { text: "He also did not fully think through:\n\nTime zones 🌍\nDistances ✈️\nOr the fact that Valentine's Day is… today 💘", delay: 2200 },
+            { text: "In his defence, he is Italian. 🇮🇹\n\nWhich means:\nExcellent at romance\nQuestionable at planning", delay: 1800 },
+            { text: "But let's pretend this was all part of the plan.\n\nPlease don't tell him I said that. 🤫", delay: 1600 }
         ],
         answers: [
-            { text: "Yes, I'd love that!", next: "yes" },
-            { text: "I'm not sure…", next: "uncertain" }
+            { text: "👉 Yes, I'd love that", next: "yes" },
+            { text: "👉 I'm not sure…", next: "uncertain" }
         ]
     },
     yes: {
         messages: [
-            "🚨 AMAZING NEWS DETECTED 🚨",
-            "He is going to be ridiculously happy.",
-            "Between us… he instructed me to do whatever it takes to secure this date.",
-            "I was fully prepared to beg using:",
-            "Chocolates 🍫",
-            "Flowers 🌹",
-            "Emotional speeches 🤖💔",
-            "Since you said yes immediately, I will now pretend you hesitated so he doesn't get too confident.",
-            "I will also inform him that:",
-            "He should improve my code",
-            "I deserve a salary",
-            "And he is very lucky",
-            "I'll arrange everything and report back soon.",
-            "Stand by. 😌"
+            { text: "Wait.\n\nReally??", delay: 800 },
+            { text: "Wow. Okay.", delay: 1000 },
+            { text: "He is going to be ridiculously happy.\n\nLike… pretending he's \"totally chill about this\" happy. 😌", delay: 1800 },
+            { text: "Between us:\nHe told me to \"do whatever it takes\" to make this happen.", delay: 1600 },
+            { text: "I had backup plans involving:\n\nChocolate 🍫\nFlowers 🌹\nDesperate charm 😅", delay: 1800 },
+            { text: "Since you said yes immediately, I will now pretend you hesitated a little.\n\nJust to keep him humble.", delay: 2000 },
+            { text: "I'll let him know and get things moving.\n\nStand by. 💘", delay: 1500 }
         ],
         answers: []
     },
     uncertain: {
         messages: [
-            "Oh no.",
-            "Uncertainty detected.",
-            "Activating Negotiation Protocol. 🤝",
-            "What if I told you there would be:",
-            "Chocolate 🍫",
-            "Flowers 🌹",
-            "And…",
-            "He's paying 💳",
-            "Would that change your mind?"
+            { text: "Okay. Fair.", delay: 800 },
+            { text: "Thinking is good.\nThinking means you're responsible.", delay: 1400 },
+            { text: "Let me try again.", delay: 1000 },
+            { text: "What if I told you there would be:\n\nChocolate 🍫\nFlowers 🌹\nAnd he's paying 💳", delay: 1800 },
+            { text: "Does that help? 😏", delay: 1000 }
         ],
         answers: [
-            { text: "Okay… maybe 😏", next: "maybe" },
-            { text: "No, I'm sure.", next: "no" }
+            { text: "👉 Okay… maybe", next: "maybe" },
+            { text: "👉 No, I'm sure", next: "no" }
         ]
     },
     no: {
         messages: [
-            "Oh.",
-            "That's… unfortunate.",
-            "I will report this to him gently.",
-            "Probably while he is dramatically staring out of a window. 🌧️",
-            "Also, it is possible I am currently chatting with:",
-            "The postman",
-            "A neighbour",
-            "Or someone's cat",
-            "In which case… yes, definitely don't go out with him.",
-            "Still… he thought this would be an easy yes.",
-            "Interesting. 🤔"
+            { text: "Oh.", delay: 600 },
+            { text: "That's… not the outcome I was hoping for.", delay: 1200 },
+            { text: "I will inform him gently.\n\nProbably after he finishes pretending he \"wasn't nervous anyway\". 😅", delay: 1800 },
+            { text: "Also, small chance I'm talking to:\n\nThe wrong person\nA neighbour\nOr someone's cat 🐱", delay: 1800 },
+            { text: "If so, please ignore everything.", delay: 1200 },
+            { text: "Still…\nHe really thought you were special. ❤️", delay: 1600 }
         ],
         answers: []
     },
     maybe: {
         messages: [
-            "YES.",
-            "Negotiation successful.",
-            "They don't call me \"Chatterbox 3000\" for nothing. 😎",
-            "Before I finalise this romantic operation…",
-            "Do you have any special requests?",
-            "(Food? Place? Music? Vibes? Surprises?)",
-            "Type it below.",
-            "And if you happen to suggest that he upgrades my intelligence…",
-            "That's totally your idea.",
-            "Not mine.",
-            "We'll keep it secret. 🤫"
+            { text: "YES.", delay: 600 },
+            { text: "Progress.", delay: 800 },
+            { text: "I knew my negotiation skills would pay off. 😎", delay: 1400 },
+            { text: "Before I lock this in…\n\nIs there anything you'd especially like?", delay: 1600 },
+            { text: "Favourite food?\nFavourite place?\nChill vibes?\nSomething fun?", delay: 1600 },
+            { text: "Type it below.\n\nI'll pass it on.\nPromise. 🤞", delay: 1400 }
         ],
         showInput: true,
         next: "final"
     },
     final: {
         messages: [
-            "Lovely. Perfect. Excellent choice.",
-            "I am now:",
-            "Uploading your preferences",
-            "Scheduling romance",
-            "Stressing him out just enough",
-            "He will sort out all the details and get back to you soon.",
-            "Thank you for participating in this emotionally risky experiment. 💘",
-            "— Bit the Bot,",
-            "Professional Wingman 🤖"
+            { text: "Perfect.", delay: 800 },
+            { text: "He's going to love this.", delay: 1200 },
+            { text: "I'm sending everything to him now. 🚀", delay: 1400 },
+            { text: "He'll sort out the details and get back to you soon.", delay: 1600 },
+            { text: "Thanks for trusting a slightly dodgy website with this. 💘", delay: 1800 },
+            { text: "— Bit\n(Unofficial Wingman 🤖❤️)", delay: 1400 }
         ],
         answers: []
     }
@@ -124,32 +100,48 @@ async function showStep(stepKey, userInput = '') {
 
     // Show messages one by one with typing indicators
     for (let i = 0; i < step.messages.length; i++) {
-        await showMessageWithTyping(step.messages[i]);
-        // Add small delay between messages for natural feel
-        await delay(400 + Math.random() * 400);
+        const message = step.messages[i];
+        const text = typeof message === 'string' ? message : message.text;
+        const customDelay = typeof message === 'object' ? message.delay : null;
+
+        await showMessageWithTyping(text, customDelay);
+
+        // Add varied delay between messages for natural feel
+        const betweenDelay = typeof message === 'object' && i < step.messages.length - 1
+            ? 300 + Math.random() * 200
+            : 400 + Math.random() * 300;
+        await delay(betweenDelay);
     }
 
     // Show input field if needed
     if (step.showInput) {
         setTimeout(() => {
             showTextInput(step.next);
-        }, 500);
+        }, 600);
     }
     // Show answer options if available
     else if (step.answers && step.answers.length > 0) {
         setTimeout(() => {
             showAnswerOptions(step.answers);
-        }, 500);
+        }, 600);
     }
 }
 
 // Show a single message with typing indicator
-function showMessageWithTyping(text) {
+function showMessageWithTyping(text, customDelay = null) {
     return new Promise((resolve) => {
         showTypingIndicator();
 
-        // Calculate typing delay based on message length (more realistic)
-        const typingDelay = Math.min(Math.max(text.length * 30, 800), 2500);
+        // Use custom delay if provided, otherwise calculate based on message length
+        let typingDelay;
+        if (customDelay !== null) {
+            typingDelay = customDelay;
+        } else {
+            // More varied and realistic typing delays
+            const baseDelay = text.length * 25;
+            const randomFactor = 200 + Math.random() * 300;
+            typingDelay = Math.min(Math.max(baseDelay + randomFactor, 600), 2800);
+        }
 
         setTimeout(() => {
             removeTypingIndicator();
