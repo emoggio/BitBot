@@ -1,0 +1,5 @@
+# Chat script (just a reference, not needed for production)
+chat.txt
+
+# Keep these files but don't highlight them
+# admin-secret-view.html should stay private!
