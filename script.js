@@ -208,6 +208,12 @@ async function showStep(stepKey, userInput = '') {
             showAnswerOptions(step.answers);
         }, 600);
     }
+    // If this is a terminal step (no answers and no input), save the response
+    else if (!step.showInput && (!step.answers || step.answers.length === 0)) {
+        // Save the conversation path for terminal steps like 'yes', 'no', or 'final'
+        const pathSummary = conversationPath.map(p => p.choice).join(' → ');
+        saveResponse(pathSummary || stepKey);
+    }
 }
 
 // Show a single message with typing indicator
